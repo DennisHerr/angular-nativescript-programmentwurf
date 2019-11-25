@@ -9,6 +9,7 @@ import { KontoComponent } from './konto/konto.component';
 import { EinzahlungComponent } from './einzahlung/einzahlung.component';
 import { StrichlisteComponent } from './strichliste/strichliste.component';
 import { BelegComponent } from './beleg/beleg.component';
+import { MenueComponent } from './menue/menue.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BelegComponent } from './beleg/beleg.component';
     KontoComponent,
     EinzahlungComponent,
     StrichlisteComponent,
-    BelegComponent
+    BelegComponent,
+    MenueComponent
   ],
   imports: [
     BrowserModule,
