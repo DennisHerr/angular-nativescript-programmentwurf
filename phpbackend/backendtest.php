@@ -7,7 +7,9 @@ function __autoload($class_name) {
 __autoload('class.Backend');
 
 $s = new Backend();
-echo '1<br />';
+echo '0<br />';
+$s->login('Testuser', 'Testuser');
+/*echo '1<br />';
 $s->getKonsum('1');
 echo '<br />';
 $s->updateKonsum('1');
@@ -16,6 +18,6 @@ $s->getEinzahlung('1');
 echo '<br />2 <br />';
 $s->updateEinzahlung('1', 50.69, 'Einzahlung', null, null);
 echo '<br />2 <br />';
-$s->getEinzahlungstermin();
+$s->getEinzahlungstermin();*/
 
 ?>

@@ -158,5 +158,40 @@ class Backend
           echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
         }
       }
+
+    // Funktion: Login
+    public function login($benutzername, $passwort)
+    {
+      try{
+        $dbc = new PDO($this->dsn, $this->user, $this->password);
+        $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dbc->query("SELECT *
+                             FROM `Benutzer`
+                             WHERE `Benutzername` = '$benutzername'
+                             AND `Passwort` = '$passwort'");
+
+        if ($stmt->rowCount() > 0) {
+
+          // JSON 
+          echo '{ "ergebnis": {
+            "login": "erfolgreich"
+                   }
+                 }';
+
+        }
+        else {
+           // JSON 
+           echo '{ "ergebnis": {
+            "login": "fehlgeschlagen"
+                   }
+                 }';
+        }
+      }
+
+        catch (Exception $e) {
+          echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
+        }
+      }
 }
 ?>
