@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,11 @@ import { EinzahlungComponent } from './einzahlung/einzahlung.component';
 import { StrichlisteComponent } from './strichliste/strichliste.component';
 import { BelegComponent } from './beleg/beleg.component';
 import { MenueComponent } from './menue/menue.component';
+import { HttpClientModule } from '@angular/common/http';
+
+// Lokalisierung festlegen, um das Datum umformatieren zu können
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 
 @NgModule({
   declarations: [
@@ -24,9 +29,14 @@ import { MenueComponent } from './menue/menue.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: "de" }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor() {
+    registerLocaleData(localeDe);
+  }
+}

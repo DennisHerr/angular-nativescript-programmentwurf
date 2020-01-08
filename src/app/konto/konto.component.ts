@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Ergebnis } from '../model/ergebnis.model';
+import { BackendService } from '../backend.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-konto',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KontoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bs: BackendService) { }
 
   ngOnInit() {
-  }
+    this.bs.getEinzahlung('1').pipe(first()).subscribe((erg: Ergebnis) => {
+      console.log(erg);
+  })
+
+}
 
 }

@@ -1,7 +1,7 @@
 <?php
 class Backend
 {
-  // Variablen deklarieren
+  // Variablen deklarieren/initialisieren
   protected $dsn = 'mysql:dbname=angular-nativescript-programmentwurf;host=localhost:3306';
   protected $user = 'root';
   protected $password = '';
@@ -46,7 +46,7 @@ class Backend
 
         $stmt = $dbc->query("INSERT INTO `Einzahlung`(`BenutzerID`, `Betrag`, `Typ`, `Beleg`, `Zeitpunkt`) VALUES ('$benutzerid',50.69,'$typ',null,NOW())");
 
-        $this->getEinzahlung('1');
+        $this->getEinzahlung($benutzerid);
 
       }
       catch (Exception $e) {
@@ -60,7 +60,6 @@ class Backend
       try{
         $dbc = new PDO($this->dsn, $this->user, $this->password);
         $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $isnull = 'ISNULL(`Beleg`)';
         
         $stmt = $dbc->query("SELECT `Betrag`, `Typ`,`Zeitpunkt`, `Beleg` IS NOT NULL AS 'Beleg'
                              FROM `Einzahlung` 
@@ -114,8 +113,7 @@ class Backend
         $monat = $zeitstempel->format('m');
         $monat = $monate[$monat];
         $jahr = $zeitstempel->format('Y');
-        echo $monat;
-        echo $jahr;
+
 
         $stmt = $dbc->query("UPDATE `Konsum` SET `Striche` = `Striche` + 1
                              WHERE `BenutzerID` = $benutzerid
@@ -144,13 +142,12 @@ class Backend
           $json = json_encode($results);
 
           // JSON 
-          echo '{ "ergebnis": {
+          echo '{
+          "ergebnis": {
             "Termine":';
           echo $json;
           echo ' }
-                 }';
-
-          
+                  }';      
         }
       }
 
@@ -166,23 +163,34 @@ class Backend
         $dbc = new PDO($this->dsn, $this->user, $this->password);
         $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $dbc->query("SELECT *
+        $stmt = $dbc->query("SELECT `ID`, `Schlüssel`
                              FROM `Benutzer`
                              WHERE `Benutzername` = '$benutzername'
                              AND `Passwort` = '$passwort'");
 
         if ($stmt->rowCount() > 0) {
 
+          // fetch, damit auf einzelne Werte aus dem Select zugegriffen werden können
+          $results = $stmt->fetch();
+          $benutzerid = 'ID';
+          $schlüssel = 'Schlüssel';
+          $benutzerid = $results[$benutzerid];
+          $schlüssel = $results[$schlüssel];
+
           // JSON 
-          echo '{ "ergebnis": {
-            "login": "erfolgreich"
+          echo '{ 
+          "ergebnis": {
+            "login": "erfolgreich",
+            "benutzerid: "'.$benutzerid.'",
+            "schlüssel: "'.$schlüssel.'"
                    }
                  }';
 
         }
         else {
            // JSON 
-           echo '{ "ergebnis": {
+           echo '{
+          "ergebnis": {
             "login": "fehlgeschlagen"
                    }
                  }';

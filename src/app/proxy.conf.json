@@ -1,0 +1,8 @@
+// PHP API auf Port 8080 -> Cross Origin
+// Post Request auf Port der Angular App -> Proxy -> PHP API
+{
+    "/angular-nativescript-programmentwurf/*": {
+      "target": "http://localhost:8080",
+      "secure": false
+    }
+  }
