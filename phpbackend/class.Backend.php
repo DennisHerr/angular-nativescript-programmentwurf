@@ -181,8 +181,8 @@ class Backend
           echo '{ 
           "ergebnis": {
             "login": "erfolgreich",
-            "benutzerid: "'.$benutzerid.'",
-            "schlüssel: "'.$schlüssel.'"
+            "benutzerid": "'.$benutzerid.'",
+            "schlüssel": "'.$schlüssel.'"
                    }
                  }';
 

@@ -47,6 +47,27 @@ export class BackendService {
         return this.termine;
   }))
 
-  } 
+  }
+
+  // Login implementieren und bei erfolreichem Login zur Übersicht rooten
+  login(benutzer: string, pw: string) {
+      return this.http.post<Ergebnis>(`${this.baseurl}`, {
+          function: 'login',
+          benutzername: benutzer,
+          passwort: pw
+        }
+      ).pipe(
+        map(erg => {
+          console.log(erg);
+          if(erg.ergebnis.login === 'erfolgreich'){
+          localStorage.setItem('benutzerid', erg.ergebnis.benutzerid);
+          localStorage.setItem('schlüssel', erg.ergebnis.schlüssel);
+
+          console.log(localStorage.getItem('benutzerid'));
+          console.log(localStorage.getItem('schlüssel'));
+        }
+    }),
+        catchError(err => throwError(err)));
+    }
 
 }

@@ -1,3 +1,8 @@
-<router-outlet></router-outlet>
-
-<app-menue></app-menue>
+<!--Abhängig davon, ob im local Storage Benutzerdaten liegen (Sind nach erfolgreichem login vorhanden)-->
+<div *ngIf="!sessionactive">
+  <app-login></app-login>
+</div>
+<div *ngIf="sessionactive">
+  <router-outlet></router-outlet>
+  <app-menue></app-menue>
+</div>
