@@ -13,7 +13,7 @@ export class KontoComponent implements OnInit {
   constructor(private bs: BackendService) { }
 
   ngOnInit() {
-    this.bs.getEinzahlung('1').pipe(first()).subscribe((erg: Ergebnis) => {
+    this.bs.getEinzahlung().pipe(first()).subscribe((erg: Ergebnis) => {
       console.log(erg);
   })
 

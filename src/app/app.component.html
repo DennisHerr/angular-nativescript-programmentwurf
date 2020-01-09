@@ -5,4 +5,5 @@
 <div *ngIf="sessionactive">
   <router-outlet></router-outlet>
   <app-menue></app-menue>
+  <button (click)="this.logout()">Logout</button>
 </div>

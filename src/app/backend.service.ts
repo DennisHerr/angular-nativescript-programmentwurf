@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, catchError } from "rxjs/operators";
 import { Termin } from './model/termin.model';
 import { Ergebnis } from './model/ergebnis.model';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
 
 @Injectable({
@@ -17,13 +17,19 @@ export class BackendService {
 
   format = 'dd.MM.yyyy';
   locale = 'de';
+  localStorageState = new Subject<any>();
 
   constructor(private http:HttpClient) { }
+
+  getNutzerId(): string {
+    console.log(`Benutzerid ${localStorage.getItem('benutzerid')}`);
+    return localStorage.getItem('benutzerid');
+  }
   
-  getEinzahlung(benutzerid: string) {
+  getEinzahlung() {
     return this.http.post<Ergebnis>(`${this.baseurl}`, {
         function: 'getEinzahlung',
-        benutzer: benutzerid
+        benutzer: this.getNutzerId()
       }
     ).pipe(
       map((erg => erg.ergebnis),
@@ -49,7 +55,6 @@ export class BackendService {
 
   }
 
-  // Login implementieren und bei erfolreichem Login zur Übersicht rooten
   login(benutzer: string, pw: string) {
       return this.http.post<Ergebnis>(`${this.baseurl}`, {
           function: 'login',
@@ -60,14 +65,30 @@ export class BackendService {
         map(erg => {
           console.log(erg);
           if(erg.ergebnis.login === 'erfolgreich'){
-          localStorage.setItem('benutzerid', erg.ergebnis.benutzerid);
-          localStorage.setItem('schlüssel', erg.ergebnis.schlüssel);
-
-          console.log(localStorage.getItem('benutzerid'));
-          console.log(localStorage.getItem('schlüssel'));
+          this.setItem('benutzerid',erg.ergebnis.benutzerid);
+          this.setItem('schlüssel',erg.ergebnis.schlüssel);
         }
     }),
         catchError(err => throwError(err)));
     }
 
+    logout() {
+      this.removeItem('benutzerid');
+      this.removeItem('schlüssel');
+    }
+    
+    // Diese Funktionen werden benötigt, um die Änderungen am localStorage mitzubekommen
+    localStorageChanges(): Observable<any> {
+      return this.localStorageState.asObservable();
+    }
+
+    setItem(key: string, value: string) {
+      localStorage.setItem(key, value);
+      this.localStorageState.next('changed');
+    }
+
+    removeItem(key: string) {
+      localStorage.removeItem(key);
+      this.localStorageState.next('changed');
+    }
 }
