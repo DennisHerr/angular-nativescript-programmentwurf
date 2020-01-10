@@ -1,1 +1,11 @@
 <p>konto works!</p>
+
+<div *ngFor="let einzahlung of einzahlungen">
+    {{einzahlung.Betrag}}
+    {{einzahlung.Typ}}
+    {{formatDate(einzahlung.Zeitpunkt)}}
+</div>
+
+<div>Gesamteinzahlung: {{summe_einzahlungen_formatiert}}</div>
+<div>Gesamtausgaben: {{summe_ausgaben_formatiert}}</div>
+<div>Kontostand: {{formatNumber(summe_einzahlungen-summe_ausgaben)}}</div>

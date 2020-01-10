@@ -13,7 +13,7 @@ class Backend
         $dbc = new PDO($this->dsn, $this->user, $this->password);
         $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $dbc->query("SELECT Monat, Jahr, Striche FROM `Konsum`
+        $stmt = $dbc->query("SELECT Monat, Jahr, Striche, Preis FROM `Konsum`
                              WHERE `BenutzerID` = '$benutzerid'");
 
         if ($stmt->rowCount() > 0) {

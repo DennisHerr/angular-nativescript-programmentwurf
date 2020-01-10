@@ -21,7 +21,8 @@ export class BackendService {
 
   constructor(private http:HttpClient) { }
 
-  getNutzerId(): string {
+  // Ermittlung der Benutzerid für den Aufruf der HTTP Requests
+  getBenutzerId(): string {
     console.log(`Benutzerid ${localStorage.getItem('benutzerid')}`);
     return localStorage.getItem('benutzerid');
   }
@@ -29,12 +30,13 @@ export class BackendService {
   getEinzahlung() {
     return this.http.post<Ergebnis>(`${this.baseurl}`, {
         function: 'getEinzahlung',
-        benutzer: this.getNutzerId()
+        benutzer: this.getBenutzerId()
       }
     ).pipe(
       map((erg => erg.ergebnis),
       catchError(err => throwError(err))));
   }
+
 
   getEinzahlungstermin() {
     return this.http.post<Ergebnis>(`${this.baseurl}`, {
@@ -52,6 +54,15 @@ export class BackendService {
         this.termine = erg;
         return this.termine;
   }))
+
+  }
+
+  getKonsum()  {
+    return this.http.post<Ergebnis>(`${this.baseurl}`, {
+      function: 'getKonsum',
+      benutzer: this.getBenutzerId()}
+      ).pipe(
+      map(erg => erg.ergebnis))
 
   }
 

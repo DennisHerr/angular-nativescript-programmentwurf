@@ -1,4 +1,5 @@
 export class Ergebnis {
+  [x: string]: any;
   private _ergebnis: any;
   private _Termine: any;
 

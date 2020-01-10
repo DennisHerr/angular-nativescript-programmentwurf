@@ -11,26 +11,24 @@ export class AppComponent implements OnInit{
   constructor(private bs: BackendService) { }
   
   title = 'angular-nativescript-programmentwurf';
-  benutzerid: string;
   sessionactive: boolean = false;
 
   ngOnInit(): void {
+    // Beim Laden der App prüfen ob 'Session' vorhanden
+    this.checkEingeloggt();
     // Änderungen im localStorage mitbekommen
     this.bs.localStorageChanges().subscribe(() => {
 
     console.log(localStorage.getItem('benutzerid'));
     console.log(localStorage.getItem('schlüssel'));
 
-    this.benutzerid = localStorage.getItem('benutzerid');
-    
-    //wenn Nutzer nicht eingeloggt -> loginkomponente
-    if (this.benutzerid !== null) {
-      this.sessionactive = true;
-    }
-    else {
-      this.sessionactive = false;
-    }
+    this.checkEingeloggt();
   })
+  }
+
+  checkEingeloggt() {
+    // wenn Nutzer nicht eingeloggt -> loginkomponente
+    this.sessionactive = (localStorage.getItem('benutzerid') !== null) ? true : false;
   }
 
   logout() {
