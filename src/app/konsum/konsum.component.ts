@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from '../backend.service';
+import { first } from 'rxjs/operators';
+import { Ergebnis } from '../model/ergebnis.model';
 
 @Component({
   selector: 'app-konsum',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KonsumComponent implements OnInit {
 
-  constructor() { }
+  monate: [];
+  constructor(private bs: BackendService) { }
 
   ngOnInit() {
+    this.bs.getKonsum().pipe(first()).subscribe((erg: Ergebnis) => {
+      this.monate = erg.monate;
+      console.log(this.monate);
+  })
   }
 
 }

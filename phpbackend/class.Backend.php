@@ -110,7 +110,7 @@ class Backend
                         12=>'Dezember');
        
         $zeitstempel = new \DateTime('now');
-        $monat = $zeitstempel->format('m');
+        $monat = ltrim($zeitstempel->format('m'), '0');
         $monat = $monate[$monat];
         $jahr = $zeitstempel->format('Y');
 

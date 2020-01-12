@@ -21,8 +21,8 @@ export class KontoComponent implements OnInit {
   saldo: any;
   format = 'dd.MM.yyyy';
   locale = 'de';
-  constructor(private bs: BackendService) { }
 
+  constructor(private bs: BackendService) { }
 
   ngOnInit() {
   this.summe_einzahlungen = 0;
@@ -66,7 +66,7 @@ export class KontoComponent implements OnInit {
      return formatDate(datum, this.format, this.locale);
   }
 
-  // immer mindestens zwei Dezimalstellen
+  // immer mindestens zwei Dezimalstellen anzeigen
   formatNumber(zahl: any){
     return (Math.round(zahl * 100) / 100).toFixed(2);
   }

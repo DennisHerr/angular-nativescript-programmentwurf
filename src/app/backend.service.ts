@@ -63,7 +63,6 @@ export class BackendService {
       benutzer: this.getBenutzerId()}
       ).pipe(
       map(erg => erg.ergebnis))
-
   }
 
   login(benutzer: string, pw: string) {
@@ -86,6 +85,14 @@ export class BackendService {
     logout() {
       this.removeItem('benutzerid');
       this.removeItem('schlüssel');
+    }
+
+    updateKonsum() {
+      return this.http.post<Ergebnis>(`${this.baseurl}`, {
+        function: 'updateKonsum',
+        benutzer: this.getBenutzerId()}
+        ).pipe(
+        map(erg => erg.ergebnis))
     }
     
     // Diese Funktionen werden benötigt, um die Änderungen am localStorage mitzubekommen
