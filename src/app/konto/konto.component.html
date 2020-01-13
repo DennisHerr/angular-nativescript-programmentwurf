@@ -12,7 +12,8 @@
 <div>Kontostand: {{formatNumber(summe_einzahlungen-summe_ausgaben)}}</div>
 
 <input placeholder="Betrag" [(ngModel)]="einzahlung.betrag" name="betrag" required>
-<input placeholder="Typ" [(ngModel)]="einzahlung.typ" name="typ" required>
+<input placeholder="Typ" [(ngModel)]="einzahlung.typ" name="typ">
 <input type="file" accept="image/*" placeholder="Beleg" [(ngModel)]="einzahlung.beleg" name="beleg" observeFiles>
 <button (click)="this.einzahlen()">Bestätigen</button>
+<div *ngIf="betragleer">Bitte mindestens den Betrag.</div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ergebnis } from '../model/ergebnis.model';
 import { BackendService } from '../backend.service';
 import { first } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { formatDate } from '@angular/common';
   templateUrl: './konto.component.html',
   styleUrls: ['./konto.component.scss']
 })
-export class KontoComponent implements OnInit {
+export class KontoComponent implements OnInit, OnDestroy {
   
   einzahlungen: [];
   monate: [];
@@ -23,6 +23,9 @@ export class KontoComponent implements OnInit {
   format = 'dd.MM.yyyy';
   locale = 'de';
 
+  einzahlungsubscription;
+  auszahlungsubscription;
+
   betrag: any;
   beleg: any;
   typ: any;
@@ -34,6 +37,8 @@ export class KontoComponent implements OnInit {
     beleg: File | null;
   }
 
+  betragleer;
+
   constructor(private bs: BackendService) {
     this.einzahlung = {
       betrag: "",
@@ -43,14 +48,15 @@ export class KontoComponent implements OnInit {
   }
 
   ngOnInit() {
+  this.betragleer = false;
   this.summe_einzahlungen = 0;
-  this.bs.getEinzahlung().pipe(first()).subscribe((erg: Ergebnis) => {
+  this.einzahlungsubscription = this.bs.getEinzahlung().pipe(first()).subscribe((erg: Ergebnis) => {
     this.einzahlungen = erg.einzahlungen;
     console.log(this.einzahlungen);
     this.getEinzahlungen();
   })
   this.summe_ausgaben = 0;
-  this.bs.getKonsum().pipe(first()).subscribe((erg: Ergebnis) => {
+  this.auszahlungsubscription = this.bs.getKonsum().pipe(first()).subscribe((erg: Ergebnis) => {
     this.monate = erg.monate;
     console.log(this.monate);
     this.getAuszahlungen();
@@ -77,7 +83,6 @@ export class KontoComponent implements OnInit {
   getKontostand() {
    this.saldo = 0;
    this.saldo = this.formatNumber(this.summe_einzahlungen - this.summe_ausgaben);
-    
   }
 
   einzahlen() {
@@ -85,7 +90,19 @@ export class KontoComponent implements OnInit {
     console.log( "Typ:", this.einzahlung.typ );
     console.log( "Beleg:", this.einzahlung.beleg );
     
-    this.bs.updateEinzahlung(this.einzahlung).subscribe();
+    if(this.einzahlung.betrag == '') {
+       this.betragleer = true;
+       
+    }
+    else {
+      this.betragleer = false;
+      this.bs.updateEinzahlung(this.einzahlung).subscribe(() => {this.ngOnDestroy(), this.ngOnInit()});
+    }
+  }
+
+  ngOnDestroy() {
+    this.einzahlungsubscription.unsubscribe();
+    this.auszahlungsubscription.unsubscribe();
   }
 
   // Klassenfunktion für den Aufruf im Template (Wrapper)
