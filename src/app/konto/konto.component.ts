@@ -30,7 +30,7 @@ export class KontoComponent implements OnInit, OnDestroy {
   beleg: any;
   typ: any;
 
-  // Forumlardaten
+  // Forumlardaten speziell wegen moeglichem Bild
   public einzahlung: {
     betrag: any;
     typ: any;
@@ -48,23 +48,23 @@ export class KontoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-  this.betragleer = false;
-  this.summe_einzahlungen = 0;
-  this.einzahlungsubscription = this.bs.getEinzahlung().pipe(first()).subscribe((erg: Ergebnis) => {
-    this.einzahlungen = erg.einzahlungen;
-    console.log(this.einzahlungen);
-    this.getEinzahlungen();
-  })
-  this.summe_ausgaben = 0;
-  this.auszahlungsubscription = this.bs.getKonsum().pipe(first()).subscribe((erg: Ergebnis) => {
-    this.monate = erg.monate;
-    console.log(this.monate);
-    this.getAuszahlungen();
-})
+    this.betragleer = false;
+    this.summe_einzahlungen = 0;
+    this.einzahlungsubscription = this.bs.getEinzahlung().pipe(first()).subscribe((erg: Ergebnis) => {
+      this.einzahlungen = erg.einzahlungen;
+      console.log(this.einzahlungen);
+      this.getEinzahlungen();
+    })
+    this.summe_ausgaben = 0;
+    this.auszahlungsubscription = this.bs.getKonsum().pipe(first()).subscribe((erg: Ergebnis) => {
+      this.monate = erg.monate;
+      console.log(this.monate);
+      this.getAuszahlungen();
+    })
   }
 
   getEinzahlungen() {
-    this.einzahlungen.forEach ((einzahlung: Ergebnis) => {
+    this.einzahlungen.forEach((einzahlung: Ergebnis) => {
       this.summe_einzahlungen = this.summe_einzahlungen + parseFloat(einzahlung.Betrag);
       this.zeitpunkt_formatiert.push(formatDate(einzahlung.Zeitpunkt,this.format, this.locale));
     })
@@ -81,8 +81,8 @@ export class KontoComponent implements OnInit, OnDestroy {
   }
 
   getKontostand() {
-   this.saldo = 0;
-   this.saldo = this.formatNumber(this.summe_einzahlungen - this.summe_ausgaben);
+    this.saldo = 0;
+    this.saldo = this.formatNumber(this.summe_einzahlungen - this.summe_ausgaben);
   }
 
   einzahlen() {
