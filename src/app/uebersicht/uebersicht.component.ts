@@ -15,18 +15,14 @@ export class UebersichtComponent implements OnInit {
   datum;
 
   constructor(private bs: BackendService) {
-
-
   }
 
   ngOnInit() {
     this.bs.getEinzahlungstermin().pipe(first()).subscribe((erg) => {
       console.log(erg);
-      
       this.datum = erg
       console.log(this.datum);
       
-    
   });
   }
 

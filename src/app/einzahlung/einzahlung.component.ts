@@ -10,6 +10,7 @@ export class EinzahlungComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

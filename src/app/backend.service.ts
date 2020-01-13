@@ -37,7 +37,6 @@ export class BackendService {
       catchError(err => throwError(err))));
   }
 
-
   getEinzahlungstermin() {
     return this.http.post<Ergebnis>(`${this.baseurl}`, {
         function: 'getEinzahlungstermin'
@@ -91,6 +90,17 @@ export class BackendService {
       return this.http.post<Ergebnis>(`${this.baseurl}`, {
         function: 'updateKonsum',
         benutzer: this.getBenutzerId()}
+        ).pipe(
+        map(erg => erg.ergebnis))
+    }
+
+    updateEinzahlung(einzahlung) {
+      return this.http.post<Ergebnis>(`${this.baseurl}`, {
+        function: 'updateEinzahlung',
+        benutzer: this.getBenutzerId(),
+        betrag: einzahlung.betrag,
+        typ: einzahlung.typ,
+        beleg: einzahlung.beleg}
         ).pipe(
         map(erg => erg.ergebnis))
     }

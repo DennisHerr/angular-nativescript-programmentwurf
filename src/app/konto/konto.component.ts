@@ -13,6 +13,7 @@ export class KontoComponent implements OnInit {
   
   einzahlungen: [];
   monate: [];
+  belege: [];
   zeitpunkt_formatiert: string[] = [];
   summe_einzahlungen: number = 0;
   summe_einzahlungen_formatiert: any;
@@ -22,7 +23,24 @@ export class KontoComponent implements OnInit {
   format = 'dd.MM.yyyy';
   locale = 'de';
 
-  constructor(private bs: BackendService) { }
+  betrag: any;
+  beleg: any;
+  typ: any;
+
+  // Forumlardaten
+  public einzahlung: {
+    betrag: any;
+    typ: any;
+    beleg: File | null;
+  }
+
+  constructor(private bs: BackendService) {
+    this.einzahlung = {
+      betrag: "",
+      typ: "",
+      beleg: null
+    };
+  }
 
   ngOnInit() {
   this.summe_einzahlungen = 0;
@@ -61,6 +79,15 @@ export class KontoComponent implements OnInit {
    this.saldo = this.formatNumber(this.summe_einzahlungen - this.summe_ausgaben);
     
   }
+
+  einzahlen() {
+    console.log( "Betrag:", this.einzahlung.betrag );
+    console.log( "Typ:", this.einzahlung.typ );
+    console.log( "Beleg:", this.einzahlung.beleg );
+    
+    this.bs.updateEinzahlung(this.einzahlung).subscribe();
+  }
+
   // Klassenfunktion für den Aufruf im Template (Wrapper)
   formatDate(datum: any){
      return formatDate(datum, this.format, this.locale);

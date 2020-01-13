@@ -44,7 +44,8 @@ class Backend
         $dbc = new PDO($this->dsn, $this->user, $this->password);
         $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $dbc->query("INSERT INTO `Einzahlung`(`BenutzerID`, `Betrag`, `Typ`, `Beleg`, `Zeitpunkt`) VALUES ('$benutzerid',50.69,'$typ',null,NOW())");
+        $stmt = $dbc->query("INSERT INTO `Einzahlung`(`BenutzerID`, `Betrag`, `Typ`, `Beleg`, `Zeitpunkt`)
+                            VALUES ('$benutzerid','$betrag','$typ','file_get_contents($beleg)',NOW())");
 
         $this->getEinzahlung($benutzerid);
 
