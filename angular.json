@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-nativescript-programmentwurf"
+    }
+  },
+  "defaultProject": "angular-nativescript-programmentwurf",
+  "cli": {
+    "defaultCollection": "@nativescript/schematics"
+  }
 }

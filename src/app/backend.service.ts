@@ -6,12 +6,24 @@ import { Ergebnis } from './model/ergebnis.model';
 import { throwError, Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
 
+import {
+    getBoolean,
+    setBoolean,
+    getNumber,
+    setNumber,
+    getString,
+    setString,
+    hasKey,
+    remove,
+    clear
+} from "tns-core-modules/application-settings";
+
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  baseurl = '/angular-nativescript-programmentwurf/backendaufruf.php';
+  baseurl = 'http://localhost:8080/angular-nativescript-programmentwurf/backendaufruf.php';
   datum: Date;
   termine: Ergebnis;
 
@@ -23,8 +35,8 @@ export class BackendService {
 
   // Ermittlung der Benutzerid für den Aufruf der HTTP Requests
   getBenutzerId(): string {
-    console.log(`Benutzerid ${localStorage.getItem('benutzerid')}`);
-    return localStorage.getItem('benutzerid');
+    console.log(`Benutzerid ${getString('benutzerid')}`);//${localStorage.getItem('benutzerid')}`);
+    return getString('benutzerid');//localStorage.getItem('benutzerid');
   }
   
   getEinzahlung() {
@@ -111,12 +123,12 @@ export class BackendService {
     }
 
     setItem(key: string, value: string) {
-      localStorage.setItem(key, value);
+      setString(key, value);//localStorage.setItem(key, value);
       this.localStorageState.next('changed');
     }
 
     removeItem(key: string) {
-      localStorage.removeItem(key);
+      remove(key);//localStorage.removeItem(key);
       this.localStorageState.next('changed');
     }
 }

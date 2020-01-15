@@ -2,6 +2,10 @@
   "name": "angular-nativescript-programmentwurf",
   "version": "0.0.0",
   "scripts": {
+    "android": "tns run android",
+    "ios": "tns run ios --insecure",
+    "mobile": "tns run",
+    "preview": "tns preview",
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
@@ -19,11 +23,19 @@
     "@angular/platform-browser": "~8.2.13",
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
+    "@nativescript/schematics": "^1.0.0",
+    "@nativescript/theme": "~2.2.1",
+    "nativescript-angular": "~8.20.0",
+    "reflect-metadata": "~0.1.12",
     "rxjs": "~6.4.0",
+    "tns-core-modules": "~6.3.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
+    "nativescript-dev-webpack": "~1.4.0",
+    "@nativescript/schematics": "~1.0.0",
+    "@nativescript/tslint-rules": "~0.0.5",
     "@angular-devkit/build-angular": "~0.803.17",
     "@angular/cli": "~8.3.17",
     "@angular/compiler-cli": "~8.2.13",
@@ -43,5 +55,11 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "nativescript": {
+    "id": "org.nativescript.ngsample",
+    "tns-ios": {
+      "version": "6.2.0"
+    }
   }
 }

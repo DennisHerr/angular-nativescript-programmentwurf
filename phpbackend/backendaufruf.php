@@ -1,9 +1,9 @@
 <?php
-
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: X-Requested-With, *");
+/*if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   header("HTTP/1.1 200 ");
-  exit;}
-
+  exit;}*/
 function __autoload($class_name) {
   require_once $class_name . '.php';
 }
