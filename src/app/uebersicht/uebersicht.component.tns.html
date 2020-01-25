@@ -1,11 +1,29 @@
-<!--<StackLayout>
-  <Label text="uebersicht works" textWrap="true"></Label>
-  <Label text="This is a migrated component" textWrap="true"></Label>
-  <Label text="{{datum}}" textWrap="true"></Label>
-</StackLayout>-->
+
+<ActionBar title="Übersicht"></ActionBar>
+
+<GridLayout class="page" rows="auto, *, 100" columns="*, *, *">
+
+  <Image  width="195" height="100" class="p-0"
+      marginTop="20" row="0" col="0" colSpan="3"></Image>
+      <Label text="{{datum}}" textWrap="true">1</Label>
+ 
+  <Button text="Konto"  [nsRouterLink]="['/konto']" (tab)="navigate('/konto', false)"></Button>
+  <StackLayout row="1" col="0" colSpan="3">
+
+  </StackLayout>
+
+
+  <Button class="fa nav-btn"
+      [text]="1" row="2" col="0" [nsRouterLink]="['/konto']"></Button>
+  <Button class="fa nav-btn"
+      [text]="2" row="2" col="1"></Button>
+  <Button class="fa nav-btn"
+      [text]="3" row="2" col="2" [nsRouterLink]="['/konto']"></Button>
+
+</GridLayout>
 
 <!--
-Original Web template:
+Original Web template:  
 
 <p>uebersicht works!</p>
 

@@ -18,7 +18,8 @@ export class AppComponent implements OnInit{
     this.checkEingeloggt();
     // Änderungen im localStorage mitbekommen
     this.bs.localStorageChanges().subscribe(() => {
-
+    console.log('localstorage changed appcomponent');
+    
     console.log(localStorage.getItem('benutzerid'));
     console.log(localStorage.getItem('schlüssel'));
 
@@ -29,6 +30,13 @@ export class AppComponent implements OnInit{
   checkEingeloggt() {
     // wenn Nutzer nicht eingeloggt -> loginkomponente
     this.sessionactive = (localStorage.getItem('benutzerid') !== null) ? true : false;
+    console.log(this.sessionactive);
+    
+  }
+
+  // Testfunktion für schnellen login
+  login() {
+    this.bs.login('Testuser', 'Testuser').subscribe();
   }
 
   logout() {

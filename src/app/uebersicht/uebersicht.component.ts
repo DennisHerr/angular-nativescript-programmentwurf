@@ -26,4 +26,14 @@ export class UebersichtComponent implements OnInit {
   });
   }
 
+  navigate (route, clear):void {
+    route = '/konto',
+    clear = false;
+    console.log('nativescript routing gestartet.');
+    this.bs.navigate(route, clear);
+    console.log('nativescript routing beendet.');
+    
+  }
+
+
 }

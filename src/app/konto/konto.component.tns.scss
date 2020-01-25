@@ -1,0 +1,47 @@
+/*
+Add your NativeScript specific styles here.
+To learn more about styling in NativeScript see:
+https://docs.nativescript.org/angular/ui/styling
+*/
+
+.gruen {
+  color: green;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.rot {
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 14px;
+}
+
+.abschnitt {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.wichtig {
+  font-weight: bold;
+}
+
+
+.button {
+  background-color: rgb(94, 107, 250);
+  font-weight: bold;
+  border-style: round;
+  color: white;
+  border-radius: 5;
+  height: 45;
+  width: 50%;
+  margin: 20 5 20 5;
+}
+
+.input {
+  font-size: 20;
+  placeholder-color: grey;
+}

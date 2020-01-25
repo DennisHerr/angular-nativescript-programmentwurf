@@ -1,14 +1,15 @@
+<ActionBar title="Kaffee App"></ActionBar>
 <StackLayout class ="form">
+  <Label class="ueberschrift" textWrap="true" text=" Willkommen in der Kaffee App!"></Label>
   <StackLayout class ="input-field">
-    <TextField class="input" name="benutzername" [(ngModel)]="logindaten.benutzername"></TextField>
+    <TextField hint="Benutzername" class="input" name="benutzername" [(ngModel)]="logindaten.benutzername"></TextField>
   </StackLayout>
   <StackLayout class ="input-field">
-    <TextField class="input" name="passwort" [(ngModel)]="logindaten.passwort"></TextField>
-    <Button text="Login" class="btn btn-primary" (tap)="login()"></Button>
+    <TextField hint="Passwort" class="input" name="passwort" [(ngModel)]="logindaten.passwort"></TextField>
+    <Button text="Login" class="button" (tap)="login()"></Button>
+    <Label *ngIf="!logindatenvollstaendig" text="Logindaten nicht vollstaendig!" textWrap="true"></Label>
   </StackLayout>
-  <Label text="login works" textWrap="true"></Label>
-  <Label text="This is a migrated component" textWrap="true"></Label>
-  <Label text="Update it to provide the UI elements required in your mobile app" textWrap="true"></Label>
+
 </StackLayout>
 
 <!--

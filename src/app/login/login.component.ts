@@ -5,7 +5,8 @@ import { AppModule } from '@src/app/app.module';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [BackendService]
 })
 
 export class LoginComponent implements OnInit {
@@ -25,9 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log('hallo');
-    
+   
   }
 
   login(): void {

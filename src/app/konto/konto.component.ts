@@ -3,6 +3,7 @@ import { Ergebnis } from '../model/ergebnis.model';
 import { BackendService } from '../backend.service';
 import { first } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-konto',
@@ -51,13 +52,14 @@ export class KontoComponent implements OnInit, OnDestroy {
     this.betragleer = false;
     this.summe_einzahlungen = 0;
     this.einzahlungsubscription = this.bs.getEinzahlung().pipe(first()).subscribe((erg: Ergebnis) => {
-      this.einzahlungen = erg.einzahlungen;
+      // nicht im Service implementiert, da in WEB und NATIV sortiert
+      this.einzahlungen = erg.einzahlungen.sort((a, b) => new Date(b.Zeitpunkt).getTime() - new Date(a.Zeitpunkt).getTime());
       console.log(this.einzahlungen);
       this.getEinzahlungen();
     })
     this.summe_ausgaben = 0;
     this.auszahlungsubscription = this.bs.getKonsum().pipe(first()).subscribe((erg: Ergebnis) => {
-      this.monate = erg.monate;
+      this.monate = erg.monate.reverse();
       console.log(this.monate);
       this.getAuszahlungen();
     })
@@ -66,7 +68,8 @@ export class KontoComponent implements OnInit, OnDestroy {
   getEinzahlungen() {
     this.einzahlungen.forEach((einzahlung: Ergebnis) => {
       this.summe_einzahlungen = this.summe_einzahlungen + parseFloat(einzahlung.Betrag);
-      this.zeitpunkt_formatiert.push(formatDate(einzahlung.Zeitpunkt,this.format, this.locale));
+      //formatDate -> momentJS
+      this.zeitpunkt_formatiert.push(this.formatDate(einzahlung.Zeitpunkt));
     })
     this.summe_einzahlungen_formatiert = this.formatNumber(this.summe_einzahlungen);
   }
@@ -107,7 +110,9 @@ export class KontoComponent implements OnInit, OnDestroy {
 
   // Klassenfunktion für den Aufruf im Template (Wrapper)
   formatDate(datum: any){
-     return formatDate(datum, this.format, this.locale);
+    // formatDate durch momentJS ersetzt (für nativescript)
+          //return formatDate(datum, this.format, this.locale);
+    return moment(datum).format("DD.MM.YYYY");
   }
 
   // immer mindestens zwei Dezimalstellen anzeigen

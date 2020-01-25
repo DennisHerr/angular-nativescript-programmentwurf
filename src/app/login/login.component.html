@@ -3,4 +3,4 @@
 <div *ngIf="!logindatenvollstaendig">Logindaten nicht vollstaendig!</div>
 <input placeholder="Benutzername" [(ngModel)]="logindaten.benutzername" name="benutzername" required>
 <input placeholder="Passwort" [(ngModel)]="logindaten.passwort" name="passwort" required>
-<button (click)="this.login()">Login</button>
+<button (click)="login()">Login</button>

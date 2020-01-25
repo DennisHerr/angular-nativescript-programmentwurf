@@ -5,6 +5,21 @@ import { Termin } from './model/termin.model';
 import { Ergebnis } from './model/ergebnis.model';
 import { throwError, Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
+import {Router} from "@angular/router";
+import * as moment from 'moment';
+import { RouterExtensions } from 'nativescript-angular/router';
+
+import {
+  getBoolean,
+  setBoolean,
+  getNumber,
+  setNumber,
+  getString,
+  setString,
+  hasKey,
+  remove,
+  clear
+} from "tns-core-modules/application-settings";
 
 
 @Injectable({
@@ -20,12 +35,12 @@ export class BackendService {
   locale = 'de';
   localStorageState = new Subject<any>();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router: Router, private routerExtensions: RouterExtensions) {}
 
   // Ermittlung der Benutzerid für den Aufruf der HTTP Requests
   getBenutzerId(): string {
-    console.log(`${localStorage.getItem('benutzerid')}`);//`Benutzerid ${getString('benutzerid')}`);
-    return localStorage.getItem('benutzerid');//getString('benutzerid');
+    console.log(`Benutzerid ${getString('benutzerid')}`);//`${localStorage.getItem('benutzerid')}`);
+    return getString('benutzerid');//localStorage.getItem('benutzerid');
   }
   
   getEinzahlung() {
@@ -41,7 +56,7 @@ export class BackendService {
   getEinzahlungstermin() {
     return this.http.post<Ergebnis>(`${this.baseurl}`, {
         function: 'getEinzahlungstermin'
-    }).pipe(map(erg => formatDate(erg.ergebnis.Termine[0].Datum, this.format, this.locale)));
+    }).pipe(map(erg => moment(erg.ergebnis.Termine[0].Datum).format("DD.MM.YYYY"))); //formatDate(erg.ergebnis.Termine[0].Datum, this.format, this.locale)));
 
   }
 
@@ -55,6 +70,9 @@ export class BackendService {
   }
 
   login(benutzer: string, pw: string) {
+    // schneller entwickeln
+    benutzer = 'Testuser';
+    pw = 'Testuser';
       return this.http.post<Ergebnis>(`${this.baseurl}`, {
           function: 'login',
           benutzername: benutzer,
@@ -65,17 +83,20 @@ export class BackendService {
           console.log(erg);
           if(erg.ergebnis.login === 'erfolgreich'){
             console.log('set localStorage');
-          
-          this.setItem('benutzerid',erg.ergebnis.benutzerid);
-          this.setItem('schlüssel',erg.ergebnis.schlüssel);
+            this.setItem('benutzerid',erg.ergebnis.benutzerid);
+            this.setItem('schlüssel',erg.ergebnis.schlüssel);
+            this.routerExtensions.navigate(["/dashboard"],{ clearHistory: true });
         }
     }),
         catchError(err => throwError(err)));
     }
 
     logout() {
+      console.log('logout');
+      
       this.removeItem('benutzerid');
       this.removeItem('schlüssel');
+      this.routerExtensions.navigate(["../"],{ clearHistory: true });
     }
 
     updateKonsum() {
@@ -97,23 +118,31 @@ export class BackendService {
         map(erg => erg.ergebnis))
     }
 
-    // Implementierung, damit der Compiler die Funktion akzeptiert
-    navigate (route, clear) {
-      console.log(route + clear);
+    navigate(route, clear) {
+      console.log('navigate');
+      
+      this.routerExtensions.navigate([route], {
+        transition: {
+            name: "fade"
+        },
+        clearHistory: false
+    });
     }
     
     // Diese Funktionen werden benötigt, um die Änderungen am localStorage mitzubekommen
     localStorageChanges(): Observable<any> {
+      console.log('localstoragechange');
       return this.localStorageState.asObservable();
     }
 
     setItem(key: string, value: string) {
-      localStorage.setItem(key, value);//setString(key, value);
+      setString(key, value);//localStorage.setItem(key, value);
       this.localStorageState.next('changed');
+      console.log(getString(key));
     }
 
     removeItem(key: string) {
-      localStorage.removeItem(key);//remove(key);
+      remove(key);//localStorage.removeItem(key);
       this.localStorageState.next('changed');
     }
 }

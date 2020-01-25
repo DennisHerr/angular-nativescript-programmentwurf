@@ -1,5 +1,33 @@
+
 <!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
 
 <!--<page-app-menue></page-app-menue>-->
 
+    
+
+
+
+  <!-- bottom navigation buttons -->
+  <!--
+  <StackLayout dock="bottom" height="50" class="bottom-navigation" orientation="horizontal">
+    <Button text="Logout" class="btn btn-primary" (tap)="logout()"></Button>
+    <Button (tap)="onNavItemTap('/dashboard')" class="btn btn-primary" text="Übersicht"></Button>
+    
+  </StackLayout>
+  -->
+  <!-- other top content -->
+  <page-router-outlet></page-router-outlet>
+
+
+<!--
 <page-router-outlet></page-router-outlet>
+Abhängig davon, ob im local Storage Benutzerdaten liegen (Sind nach erfolgreichem login vorhanden)
+<div *ngIf="!sessionactive">
+    <app-login></app-login>
+  </div>
+  <div *ngIf="sessionactive">
+    <router-outlet></router-outlet>
+    <app-menue></app-menue>
+    <button (click)="this.logout()">Logout</button>
+  </div>
+  -->
