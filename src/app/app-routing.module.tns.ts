@@ -8,6 +8,7 @@ import { UebersichtComponent } from './uebersicht/uebersicht.component';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component.tns';
 import { KontoComponent } from './konto/konto.component';
+import { StrichlisteComponent } from './strichliste/strichliste.component';
 
 export const routes: Routes = [
   {
@@ -18,14 +19,10 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard', component: UebersichtComponent
-  },/*
-  {
-    path: 'einzahlung', component: EinzahlungComponent
   },
   {
     path: 'strichliste', component: StrichlisteComponent
   },
-  */
   {
     path: 'konto', component: KontoComponent
   }

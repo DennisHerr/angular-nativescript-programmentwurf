@@ -87,21 +87,18 @@ export class BackendService {
     }
 
     updateEinzahlung(einzahlung) {
+      console.log(einzahlung.beleg);
+      
       return this.http.post<Ergebnis>(`${this.baseurl}`, {
         function: 'updateEinzahlung',
         benutzer: this.getBenutzerId(),
         betrag: einzahlung.betrag,
         typ: einzahlung.typ,
-        beleg: einzahlung.beleg}
+        beleg: einzahlung.beleg == null ? '' : einzahlung.beleg}
         ).pipe(
         map(erg => erg.ergebnis))
     }
 
-    // Implementierung, damit der Compiler die Funktion akzeptiert
-    navigate (route, clear) {
-      console.log(route + clear);
-    }
-    
     // Diese Funktionen werden benötigt, um die Änderungen am localStorage mitzubekommen
     localStorageChanges(): Observable<any> {
       return this.localStorageState.asObservable();
@@ -115,5 +112,15 @@ export class BackendService {
     removeItem(key: string) {
       localStorage.removeItem(key);//remove(key);
       this.localStorageState.next('changed');
+    }
+
+    // Bereich: Implementierung, damit der Compiler die Funktion akzeptiert
+    navigate (route, clear) {
+      console.log(route + clear);
+    }
+
+    getPicture(): [] {
+      console.log('getPicture');
+      return [];
     }
 }

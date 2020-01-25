@@ -3,3 +3,18 @@ Add your NativeScript specific styles here.
 To learn more about styling in NativeScript see:
 https://docs.nativescript.org/angular/ui/styling
 */
+
+.button {
+    background-color: #696969;
+    font-weight: bold;
+    border-style: round;
+    color: white;
+    border-radius: 5;
+    height: 45;
+    width: 50%;
+    margin: 20 5 10 5;
+}
+
+.unterstrichen {
+    text-decoration: underline;
+}

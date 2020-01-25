@@ -31,6 +31,8 @@ export class KontoComponent implements OnInit, OnDestroy {
   beleg: any;
   typ: any;
 
+  bildListe: [];
+
   // Forumlardaten speziell wegen moeglichem Bild
   public einzahlung: {
     betrag: any;
@@ -53,7 +55,7 @@ export class KontoComponent implements OnInit, OnDestroy {
     this.summe_einzahlungen = 0;
     this.einzahlungsubscription = this.bs.getEinzahlung().pipe(first()).subscribe((erg: Ergebnis) => {
       // nicht im Service implementiert, da in WEB und NATIV sortiert
-      this.einzahlungen = erg.einzahlungen.sort((a, b) => new Date(b.Zeitpunkt).getTime() - new Date(a.Zeitpunkt).getTime());
+      this.einzahlungen = (erg.einzahlungen.sort((a, b) => new Date(a.Zeitpunkt).getTime() - new Date(b.Zeitpunkt).getTime())).reverse();
       console.log(this.einzahlungen);
       this.getEinzahlungen();
     })
@@ -103,6 +105,13 @@ export class KontoComponent implements OnInit, OnDestroy {
     }
   }
 
+  bildAuswaehlen() {
+    
+    this.bs.getPicture();
+    this.einzahlung.beleg = undefined;
+    
+  }
+
   ngOnDestroy() {
     this.einzahlungsubscription.unsubscribe();
     this.auszahlungsubscription.unsubscribe();
@@ -112,7 +121,7 @@ export class KontoComponent implements OnInit, OnDestroy {
   formatDate(datum: any){
     // formatDate durch momentJS ersetzt (für nativescript)
           //return formatDate(datum, this.format, this.locale);
-    return moment(datum).format("DD.MM.YYYY");
+    return moment(datum).format("DD.MM.YYYY HH:mm");
   }
 
   // immer mindestens zwei Dezimalstellen anzeigen

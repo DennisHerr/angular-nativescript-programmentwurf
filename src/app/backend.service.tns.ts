@@ -21,6 +21,8 @@ import {
   clear
 } from "tns-core-modules/application-settings";
 
+import * as imagepicker from "nativescript-imagepicker";
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,8 @@ export class BackendService {
   format = 'dd.MM.yyyy';
   locale = 'de';
   localStorageState = new Subject<any>();
+  bildListe: [];
+
 
   constructor(private http:HttpClient, private router: Router, private routerExtensions: RouterExtensions) {}
 
@@ -113,7 +117,7 @@ export class BackendService {
         benutzer: this.getBenutzerId(),
         betrag: einzahlung.betrag,
         typ: einzahlung.typ,
-        beleg: einzahlung.beleg}
+        beleg: einzahlung.beleg == null ? '' : einzahlung.beleg}
         ).pipe(
         map(erg => erg.ergebnis))
     }
@@ -127,6 +131,32 @@ export class BackendService {
         },
         clearHistory: false
     });
+    }
+
+    getPicture(): Array<any> {
+
+      let context = imagepicker.create({
+        mode: "single" // multiple, mehrere Bilder möglich
+    });
+
+      context
+      .authorize()
+      .then(function() {
+          return context.present();
+      })
+      .then(function(selection) {
+          selection.forEach(function(selected) {
+              // process the selected image
+          });
+
+          this.bildListe.items = selection;
+          
+      }).catch(function (e) {
+          // process error
+      });
+      console.log(this.bildListe);
+      
+      return this.bildListe;
     }
     
     // Diese Funktionen werden benötigt, um die Änderungen am localStorage mitzubekommen

@@ -11,6 +11,7 @@ import { UebersichtComponent } from "@src/app/uebersicht/uebersicht.component";
 import { HttpClientModule } from '@angular/common/http';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { KontoComponent } from '@src/app/konto/konto.component';
+import { StrichlisteComponent } from '@src/app/strichliste/strichliste.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from 'nativescript-angular/forms';
@@ -25,7 +26,8 @@ import { KontoComponent } from '@src/app/konto/konto.component';
     LoginComponent,
     MenueComponent,
     UebersichtComponent,
-    KontoComponent
+    KontoComponent,
+    StrichlisteComponent
   ],
   imports: [
     NativeScriptModule,

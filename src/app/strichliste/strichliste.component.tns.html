@@ -1,0 +1,17 @@
+<ActionBar title="Strichliste"></ActionBar>
+<StackLayout>
+  <Label text="Aktueller Monat: {{stricheAktuellerMonat}}" textWrap="true"></Label>
+  <Label text="Summe: {{summeAktuellerMonat}}" textWrap="true"></Label>
+  <Button (tap)="updateStrichliste()" class="button" text="Strich"></Button>
+</StackLayout>
+
+<!--
+Original Web template:
+
+<p>strichliste works!</p>
+<div>
+Aktueller Monat: {{stricheAktuellerMonat}}
+Summe: {{summeAktuellerMonat}}
+<button (click)="this.updateStrichliste()">Strich eintragen</button>
+</div>
+-->

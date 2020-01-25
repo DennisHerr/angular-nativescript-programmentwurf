@@ -62,7 +62,10 @@ export class StrichlisteComponent implements OnInit {
     
   }
 
+
   updateStrichliste () {
+    console.log('updateStrichliste');
+    
     this.bs.updateKonsum().pipe(first()).subscribe((erg: Ergebnis) => {
       this.monateKonsum = erg.monate;
       console.log(this.monateKonsum);
