@@ -20,7 +20,9 @@
             </TabStrip>
 
             <TabContentItem>
-                <StackLayout>
+                
+                    <!--Workaround für Höhenbug-->
+                    <!--<StackLayout>-->
                     <!--<Label class="abschnitt" text="Gutschriften"></Label>-->
                     <ListView [items]="einzahlungen">
                         <ng-template let-item="item">
@@ -32,11 +34,13 @@
                             </StackLayout>
                         </ng-template>
                     </ListView>
-                </StackLayout>
+                <!--</StackLayout>-->
             </TabContentItem>
 
             <TabContentItem>
-           <StackLayout>
+                <!--Workaround für Höhenbug-->
+           <!--<StackLayout>-->
+               <!--<Label class="abschnitt" text="Gutschriften"></Label>-->
                     <ListView [items]="monate">
                         <ng-template let-item="item">
                             <StackLayout stretchLastChild="true" padding="0">
@@ -47,7 +51,7 @@
                             </StackLayout>
                         </ng-template>
                     </ListView>
-                </StackLayout>
+                <!--</StackLayout>-->
             </TabContentItem>
 
             <TabContentItem>
