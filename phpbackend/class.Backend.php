@@ -14,7 +14,8 @@ class Backend
         $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt = $dbc->query("SELECT Monat, Jahr, Striche, Preis FROM `Konsum`
-                             WHERE `BenutzerID` = '$benutzerid'");
+                             WHERE `BenutzerID` = '$benutzerid'
+                             AND `Striche`!= 0");
 
         if ($stmt->rowCount() > 0) {
           $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

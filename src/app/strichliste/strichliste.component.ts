@@ -47,7 +47,8 @@ export class StrichlisteComponent implements OnInit {
         console.log(monate.Striche);
         
         this.stricheAktuellerMonat = monate.Striche;
-        this.summeAktuellerMonat = this.formatNumber((this.stricheAktuellerMonat * monate.Preis + 0.0001));
+        this.summeAktuellerMonat = this.formatNumber(this.stricheAktuellerMonat * monate.Preis + 0.0001);
+        this.preisAktuellerMonat = this.formatNumber(monate.Preis);
         throw exitException;
       }
       else {

@@ -1,8 +1,9 @@
 <ActionBar title="Strichliste"></ActionBar>
 <StackLayout>
-  <Label text="Aktueller Monat: {{stricheAktuellerMonat}}" textWrap="true"></Label>
-  <Label text="Summe: {{summeAktuellerMonat}}" textWrap="true"></Label>
-  <Button (tap)="updateStrichliste()" class="button" text="Strich"></Button>
+  <Label class ="h2 text-center p-t-20" text="Aktueller Monat: {{stricheAktuellerMonat}}" textWrap="true"></Label>
+  <Label class ="h2 text-center p-t-20" text="Summe: {{summeAktuellerMonat}} €" textWrap="true"></Label>
+  <Label class ="h3 text-center p-t-20" text="Tassenpreis: {{preisAktuellerMonat}} €" textWrap="true"></Label>
+  <Button (tap)="updateStrichliste()" class="button" text="Strich hinzufügen"></Button>
 </StackLayout>
 
 <!--

@@ -3,7 +3,7 @@
 <div *ngFor="let einzahlung of einzahlungen">
     {{einzahlung.Betrag}}
     {{einzahlung.Typ == '' ? 'Aufladung' : einzahlung.Typ}}
-    {{einzahlung.Beleg == '1' ? 'ja' : 'nein'}}
+    <!--{{einzahlung.Beleg == '1' ? 'ja' : 'nein'}}-->
     {{formatDate(einzahlung.Zeitpunkt)}}
 </div>
 
@@ -15,5 +15,5 @@
 <input placeholder="Typ" [(ngModel)]="einzahlung.typ" name="typ">
 <input type="file" accept="image/*" placeholder="Beleg" [(ngModel)]="einzahlung.beleg" name="beleg" observeFiles>
 <button (click)="this.einzahlen()">Bestätigen</button>
-<div *ngIf="betragleer">Bitte mindestens den Betrag.</div>
+<div *ngIf="betragleer">Bitte mindestens den Betrag angeben.</div>
 

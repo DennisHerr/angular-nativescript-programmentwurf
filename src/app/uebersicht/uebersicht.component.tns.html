@@ -1,5 +1,5 @@
 
-<ActionBar title="Übersicht"></ActionBar>
+<ActionBar title="Dashboard"></ActionBar>
 
 
 <StackLayout>
@@ -7,9 +7,11 @@
     <Label text="{{datum}}" class="h2 text-center p-t-20 unterstrichen" textwrap="true"></Label>
 
   <Button class="button"
-      text="Kontoübersicht" row="2" col="0" [nsRouterLink]="['/konto']"></Button>
+      text="Kontoübersicht" [nsRouterLink]="['/konto']"></Button>
   <Button class="button"
-      text="Strichliste" row="2" col="1" [nsRouterLink]="['/strichliste']"></Button>
+      text="Strichliste" [nsRouterLink]="['/strichliste']"></Button>
+  <Button class="button logout"
+      text="Logout" (tap)="logout()" [nsRouterLink]="['..']" clearHistory="true"></Button>
     </StackLayout>
 
 

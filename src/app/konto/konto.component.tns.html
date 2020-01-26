@@ -1,10 +1,10 @@
 
-<ActionBar title="Konto"></ActionBar>
+<ActionBar title="Kontoübersicht"></ActionBar>
 
 <StackLayout  padding="0" orientation="vertical" stretchLastChild="true">
-    <Label class="label" text="Gesamteinzahlung: {{summe_einzahlungen_formatiert}} €"></Label>
-    <Label class="label" text="Gesamtausgaben: {{summe_ausgaben_formatiert}} €"></Label>
-    <Label class="label wichtig" text="Kontostand: {{formatNumber(summe_einzahlungen-summe_ausgaben)}} €"></Label>
+    <Label class="label h3" text="Gesamteinzahlung: {{summe_einzahlungen_formatiert}} €"></Label>
+    <Label class="label h3" text="Gesamtausgaben: {{summe_ausgaben_formatiert}} €"></Label>
+    <Label class="label wichtig h3" text="Kontostand: {{formatNumber(summe_einzahlungen-summe_ausgaben)}} €"></Label>
     <TabContentItem>
         <Tabs>
             <TabStrip>
@@ -21,13 +21,13 @@
 
             <TabContentItem>
                 <StackLayout>
-                    <Label class="abschnitt" text="Gutschriften"></Label>
+                    <!--<Label class="abschnitt" text="Gutschriften"></Label>-->
                     <ListView [items]="einzahlungen">
                         <ng-template let-item="item">
                             <StackLayout stretchLastChild="true" padding="0">
                                 <Label class="label" textWrap="true" [text]="('Zeitpunkt: ') + (formatDate(item.Zeitpunkt))"></Label>
                                 <Label class="label" textWrap="true" [text]="('Typ: ') + (item.Typ  == '' ? 'Aufladung' : item.Typ)"></Label>
-                                <Label class="label" textWrap="true" [text]="('Beleg: ') + (item.Beleg == '1' ? 'ja' : 'nein')"></Label>
+                                <!--<Label class="label" textWrap="true" [text]="('Beleg: ') + (item.Beleg == '1' ? 'ja' : 'nein')"></Label>-->
                                 <Label class="gruen" textWrap="true" [text]="('+') + (item.Betrag) + (' €')"></Label>
                             </StackLayout>
                         </ng-template>
@@ -36,25 +36,23 @@
             </TabContentItem>
 
             <TabContentItem>
-     
-                    <Label class="abschnitt" text="Ausgaben"></Label>
+           <StackLayout>
                     <ListView [items]="monate">
                         <ng-template let-item="item">
-                            <StackLayout stretchLastChild="true">
-                                <Label class="label" textWrap="true" [text]="('Monat: ') + (item.Monat)"></Label>
-                                <Label class="label" textWrap="true" [text]="('Jahr: ') + (item.Jahr)"></Label>
+                            <StackLayout stretchLastChild="true" padding="0">
+                                <Label class="label" textWrap="true" [text]="('Monat: ') + (item.Monat) + (' ') + (item.Jahr)"></Label>
                                 <Label class="label" textWrap="true" [text]="('Striche: ') + (item.Striche)"></Label>
-                                <Label class="label" textWrap="true" [text]="('Preis : ') + (formatNumber(item.Preis)) + (' €')"></Label>
+                                <Label class="label" textWrap="true" [text]="('Preis: ') + (formatNumber(item.Preis)) + (' €')"></Label>
                                 <Label class="rot" textWrap="true" [text]="('-') + (formatNumber(item.Striche * item.Preis)) + (' €')"></Label>
                             </StackLayout>
                         </ng-template>
                     </ListView>
-               
+                </StackLayout>
             </TabContentItem>
 
             <TabContentItem>
                     <StackLayout class ="form">
-                        <Label class="wichtig" text="Bitte füllen Sie das Formular aus."></Label>
+                        <Label class="wichtig h2 p-t-20" text="Bitte füllen Sie das Formular aus."></Label>
                         <StackLayout class ="input-field">
                           <TextField hint="Betrag" class="input" name="betrag" [(ngModel)]="einzahlung.betrag"></TextField>
                         </StackLayout>
@@ -63,9 +61,9 @@
 
                         </StackLayout>
                         <StackLayout class ="input-field">
-                            <Button [(ngModel)]="einzahlung.beleg" class="button" name="beleg" text="Bild auswählen" (tap)="bildAuswaehlen()"></Button>
-                            <Label *ngIf="betragleer" text="Bitte mindestens den Betrag angeben." textWrap="true"></Label>
-                            <Button text="Bestätigen" class="button" (tap)="einzahlen()" [nsRouterLink]="['/konto']"></Button>
+                            <Button [(ngModel)]="einzahlung.beleg" class="button bild" name="beleg" text="Bild auswählen" (tap)="bildAuswaehlen()"></Button>
+                            <Button text="Bestätigen" class="button" (tap)="einzahlen()" [nsRouterLink]="['/10']"></Button>
+                            <Label *ngIf="betragleer" text="Bitte mindestens den Betrag angeben." textWrap="true" class="h2 p-t-20"></Label>
                           </StackLayout>
                       
                       </StackLayout>
