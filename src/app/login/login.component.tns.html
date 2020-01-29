@@ -5,7 +5,7 @@
     <TextField hint="Benutzername" class="input" name="benutzername" [(ngModel)]="logindaten.benutzername"></TextField>
   </StackLayout>
   <StackLayout class ="input-field">
-    <TextField hint="Passwort" class="input" name="passwort" [(ngModel)]="logindaten.passwort"></TextField>
+    <TextField hint="Passwort" class="input" name="passwort" secure="true" [(ngModel)]="logindaten.passwort"></TextField>
     <Button text="Login" class="button" (tap)="login()"></Button>
     <Label *ngIf="!logindatenvollstaendig" text="Logindaten nicht vollständig!" textWrap="true" class="h3"></Label>
   </StackLayout>
