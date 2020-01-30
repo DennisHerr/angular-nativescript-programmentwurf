@@ -75,8 +75,8 @@ export class BackendService {
 
   login(benutzer: string, pw: string) {
     // schneller entwickeln
-    benutzer = 'Testuser';
-    pw = 'Testuser';
+    // benutzer = 'Testuser';
+    // pw = 'Testuser';
       return this.http.post<Ergebnis>(`${this.baseurl}`, {
           function: 'login',
           benutzername: benutzer,

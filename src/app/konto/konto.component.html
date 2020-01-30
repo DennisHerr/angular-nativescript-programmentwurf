@@ -1,15 +1,21 @@
 <p>konto works!</p>
 
 <div *ngFor="let einzahlung of einzahlungen">
-    {{einzahlung.Betrag}}
+    {{einzahlung.Betrag}} €
     {{einzahlung.Typ == '' ? 'Aufladung' : einzahlung.Typ}}
     <!--{{einzahlung.Beleg == '1' ? 'ja' : 'nein'}}-->
     {{formatDate(einzahlung.Zeitpunkt)}}
 </div>
+<div *ngFor="let monat of monate">
+    {{monat.Striche}}
+    {{monat.Preis}} €
+    {{formatNumber(monat.Striche * monat.Preis)}} €
+    {{monat.Monat}}
+</div>
 
-<div>Gesamteinzahlung: {{summe_einzahlungen_formatiert}}</div>
-<div>Gesamtausgaben: {{summe_ausgaben_formatiert}}</div>
-<div>Kontostand: {{formatNumber(summe_einzahlungen-summe_ausgaben)}}</div>
+<div>Gesamteinzahlung: {{summe_einzahlungen_formatiert}} €</div>
+<div>Gesamtausgaben: {{summe_ausgaben_formatiert}} €</div>
+<div>Kontostand: {{formatNumber(summe_einzahlungen-summe_ausgaben)}} €</div>
 
 <input placeholder="Betrag" [(ngModel)]="einzahlung.betrag" name="betrag" required>
 <input placeholder="Typ" [(ngModel)]="einzahlung.typ" name="typ">
