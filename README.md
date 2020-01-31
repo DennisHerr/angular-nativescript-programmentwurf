@@ -1,27 +1,23 @@
-# AngularNativescriptProgrammentwurf
+# Einrichtung der App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
+**Einrichtung der Datenbank**
 
-## Development server
+Zuerst sollte XAMPP oder eine vergleichbare Software installiert werden. Nach dem Starten der Konsole muss Apache und MySQL gestartet werden. Apache muss dabei für die App unter dem Port :8080 laufen. Nach dem Aufruf von der phpMyAdmin Konsole im Browser sollte zunächst eine neue Datenbank mit dem Namen *angular-nativescript-programmentwurf* erstellt und ausgewählt werden. Nach diesem Schritt kann über den Reiter ,importieren`und Auswahl des SQL Skriptes (angular-nativescript-programmentwurf.sql) die Datenbank inklusive der Datensätze importiert werden.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Einrichtung der App**
 
-## Code scaffolding
+Nach der Navigation in das git Repository müssen zunächst die nötigen Abhängigkeiten geladen werden.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**npm install**
 
-## Build
+Zum Ausführen der nativen Variante der App mit einer Entwicklerkonsole (in diesem Fall iOS und ein macOS Gerät notwendig):
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**ns debug ios --inspector**
 
-## Running unit tests
+_Für den funktionalen Vergleich die Webversion für den Browser (http://localhost:4200)_
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+*ng serve*
 
-## Running end-to-end tests
+_Das Styling ist in dieser Version nicht verfügbar_
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Der Benutzername und das Passwort lauten Testuser/Testuser.
